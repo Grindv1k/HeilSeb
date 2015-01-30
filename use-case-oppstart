@@ -13,8 +13,8 @@ Suskess-scenario:
 3.  Heisen står i ro ved etasjen
 
 Utvidelser:
-1a. Heisen står allerede ved en etasje
-  1a.1  Hopp til punkt 3
+  1a. Heisen står allerede ved en etasje
+    1a.1  Hopp til punkt 3
 
 Sukessgaranti:
   Heisen står i ro ved en etasje, klar for bestilling.
