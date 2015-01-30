@@ -7,7 +7,7 @@ Precondition:
 Trigger: 
   Vi skrur på PLS slik programmet blir aktivt.
   
-Suskess-scenario:
+Suksess-scenario:
 1.  Heisen kjører nedover
 2.  Heisen stopper ved første etasje den møter
 3.  Heisen står i ro ved etasjen
