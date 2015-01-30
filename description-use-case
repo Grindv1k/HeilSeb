@@ -16,7 +16,7 @@ Itslearning: Beskrivelsen av oppgaven om heisprosjektet
 Fowler: UML Distilled, kap 9 og tilhørende lysark".
 
 Fra kapittel 9:
-*En aktør trenger ikke være en person
+*En aktør er en rolle
 *UML-standarden sier ikke noe om hvordan use cases skal se ut
 *Tekst er mye viktigere enn grafiske diagram, man trenger ikke grafiske diagram
 *Skal være enkelt, beskrive step by step hva som skjer mellom aktør og system
