@@ -1,5 +1,4 @@
-1: Aktør(person) bestiller heis
-2: Aktør(person) trykker stopp
-3: Aktør(heisen) stopper i en etasje
-
-tbc
+1: Vi starter programmet (heislab.pdf 4.1)
+2: En person bestiller en etasje
+3: En person kjører heisen
+4: En person trykker stopp 
