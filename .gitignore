@@ -5,6 +5,7 @@
 !source/
 !source/*.c
 !source/*.h
+!source/MakeFile
 
 #uml
 !uml/
