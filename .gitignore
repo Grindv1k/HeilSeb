@@ -2,8 +2,10 @@
 *
 
 #.c source
+!source\
 !source\*.c
 !source\*.h
 
 #uml
+!uml\
 !uml\*.txt
