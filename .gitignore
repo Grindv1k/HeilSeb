@@ -2,8 +2,8 @@
 *
 
 #.c source
-!\source\*.c
-!\source\*.h
+!source\*.c
+!source\*.h
 
 #uml
-!\uml\*.txt
+!uml\*.txt
