@@ -1,45 +1,35 @@
 # Bestilling fra heis
 Precondition:
   Heisen er ikke i oppstartsfasen.
+  Det er en passasjer i heisen.
   Døren er lukket.
   Stopp-knapp er ikke trykt inn.
   
 Trigger:
-  Passasjer trykker på en etasje fra innsiden av heisen.
+  En etasje blir valgt fra innsiden av heisen.
   
 Suksess-scenario:
-1. Passasjer trykker på ønsket etasje
+1. Knapp for etasje blir registrert
 2. Heisen indikerer hvilken etasje som er bestilt
 3. Heisen kjører mot ønsket etasje
 4. Heisen stopper ved ønsket etasje
 5. Dørene åpnes og holdes åpen i et passende intervall (indikert ved lys)
 6. Passasjeren har forlatt heisen, dørene lukkes (indikert ved lys)
 
-Utvidelser:
-  2a. Ønsket etasje blir ikke indikert, men bestillingen er motatt
-  2a.1 Hopp til punkt 3
-  2b. Ønsket etasje blir indikert, men bestillingen ble ikke motatt
-  2b.1 ???
-  2c. Ønsket etasje blir ikke indikert, og bestillingen ble ikke motatt
-  2c.1 ???
-  
-  3b. Heisen kjører i motsatt retning av bestillingen, da en bestilling i motsatt retning var først ute
-  3b.1 Bestillingen i motsatt retning blir utført
-  3b.2 Hopp til punkt 3
-  
-  4a. Heisen stopper før ønsket etasje, da en bestilling i samme retning med lavere etasjenr. var bestilt
-  4c.1 Hopp til punkt 3
-  
-  5a. Dørene åpnes ikke
-  5a.1 ???
-  5b. Dørlyset lyser ikke
-  5b.1 Hopp til punkt 6
+Utvidelser: 
+  3a. En bestilling i motsatt retning ligger foran i køen
+    3a.1 Bestillingen i motsatt retning blir utført
+    3a.2 Hopp til punkt 3
+  3b. En bestilling i samme retning med nærmere etasjenummer ligger i køen
+    3b.1 Bestillingen med nærmest etasjenummer i samme retning, blir utført først
+    3b.2 Hopp til punkt 3
   
   6a. Dørene lukkes ikke
-  6a.1 Av sikkerhet må ikke heisen da starte bevegelse
+    6a.1 Av sikkerhet må ikke heisen da starte bevegelse
+    6a.2 Hopp til punkt 6
   
   Suksessgaranti:
-    Passasjeren har trygt forlatt heisen, og dørene er lukket og heisen er klar for å utføre neste bestilling.
+    Heisen står i ro, dørene er lukket og heisen er klar for å utføre neste bestilling.
     
   Minimal garanti:
-    Heisen beveger seg ikke når det ikke ønskes. (?)
+    Heisen står stille med dørene lukket.

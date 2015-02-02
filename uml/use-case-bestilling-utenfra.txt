@@ -1,50 +1,33 @@
 # Bestilling fra utsiden
 Precondition:
-  Systemet er ikke i oppstartsfasen.
+  Systemet er ferdig med oppstartsfasen.
   Heisen står stille, eller den kjører.
+  Stopp-knapp er ikke trykt inn.
   
 Trigger:
-  En bestilling blir registrert fra en etasjen passasjeren står ved.
+  En bestilling blir registrert fra den etasjen passasjeren står ved.
   
 Suksess-scenario:
-1.  Passasjer bestiller heisen ved en etasje
-2.  Passasjeren kan se knappen lyse, og skjønner at bestillingen er mottatt
-3.  Passasjeren kan følge med på hvilken etasje heisen er i ved etasjeindikatoren
+1.  Heisen bestilles fra en etasje
+2.  Knappen lyser, og viser at bestillingen er mottatt
+3.  Etasjeindikatoren viser hvilken etasje heisen sist passerte
 4.  Heisen kjører mot etasjen som er bestilt
-5.  Heisen stopper i passasjerens etasje
+5.  Heisen stopper i etasjen som er bestilt
 6.  Døren åpnes og passasjeren kan stige på (indikert ved dørlys på)
 7.  Døren lukkes etter et passende intervall (indikert ved dørlys av)
 
-Utvidelser:
-  2a. Bestillingsknappen lyser ikke og bestillingen ble ikke motatt
-    2a.1  Hopp til punkt 3
-  2b. Bestillingsknappen lyser men bestillingen ble ikke motatt
-    2b.1  Hopp til punkt 3
-  2c. Bestillingsknappen lyser ikke men bestillinegn ble mottatt
-    2c.1  Hopp til punkt 3
-  
-  3a. Etasjeindikatoren lyser ikke
-  3b. Etasjeindikatoren viser feil etasje
-  
-  4a. Heisen har bestillinger i motsatt retning fra passasjerens ønskede retning
-    4a.1  Heisen gjør ferdig de bestillingene
-    4a.2  Hopp til punkt 4
-  4b. Heisen mottar en bestilling i samme retning som passasjerens ønskede retning, for en etasje som kommer før etasjen til passasjeren
+Utvidelser:  
+  4a. Heisen har bestillinger i motsatt retning fra bestilt retning
+    4a.1  Bestillingen legges til i køen
+    4a.2  Heisen gjør ferdig aktiv bestilling
+    4a.3  Hopp til punkt 4
+  4b. Heisen mottar eller har mottatt en bestilling i samme retning som bestilt retning, men fra en etasje som kommer før etasjen den opprinnelige bestillingen kom fra
     4b.1  Heisen stopper i den etasjen og plukker opp passasjeren(e)
     4b.2  Hopp til punkt 4
   
-  5a. Heisen stopper ikke ved passasjerens etasje
-    5a.1 Hopp til punkt 4
-  
-  6a. Dørene åpnes ikke
-    6a.1  ???
-    
-  7a. Dørene lukkes ikke
-    7a.1  ???
-  
 Suksessgaranti:
-  Passasjeren har hatt nok tid til å gå inn i heisen og dørerene er blitt lukket.
+  Passasjeren har hatt nok tid til å gå inn i heisen og dørene er blitt lukket.
 
 Minimal garanti:
-  Heisen gjør ferdig sine tidligere bestillinger.
+  Heisen står stille med dørene lukket.
 

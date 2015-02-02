@@ -8,17 +8,22 @@ Trigger:
   Vi skrur på PLS slik programmet blir aktivt.
   
 Suksess-scenario:
-1.  Heisen kjører nedover
-2.  Heisen stopper ved første etasje den møter
-3.  Heisen står i ro ved etasjen
+1.  Heisen står i ro.
+2.  Heisen kjører nedover
+3.  Heisen stopper ved første etasje den møter
+4.  Heisen står i ro ved etasjen
+5.  Dørene åpnes i et passende intervall
+6.  Dørene lukkes
 
 Utvidelser:
-  1a. Heisen står allerede ved en etasje
-    1a.1  Hopp til punkt 3
+  1a. Dørene er åpne
+    1a.1 Lukk dørene
+    1a.2 Hopp til punkt 1
+  1b. Heisen står allerede ved en etasje
+    1b.1  Hopp til punkt 3
 
 Sukessgaranti:
-  Heisen står i ro ved en etasje, klar for bestilling.
+  Heisen står i ro ved en etasje med dørene lukket, klar for bestilling.
 
 Minimal garanti:
-  Heisen står i ro ved en etasje. (?)
-s
+  Heisen står i ro ved en etasje med dørene lukket.
