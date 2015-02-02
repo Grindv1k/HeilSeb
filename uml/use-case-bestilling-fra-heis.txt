@@ -13,8 +13,8 @@ Suksess-scenario:
 2. Heisen indikerer hvilken etasje som er bestilt
 3. Heisen kjører mot ønsket etasje
 4. Heisen stopper ved ønsket etasje
-5. Lyset på opp-/ned-knappen slukkes
-6. Dørene åpnes og holdes åpen i et passende intervall (indikert ved lys)
+5. Dørene åpnes og holdes åpen i et passende intervall (indikert ved lys)
+6. Lyset på opp-/ned-knappen slukkes
 7. Passasjeren har forlatt heisen, dørene lukkes (indikert ved lys)
 
 Utvidelser: 

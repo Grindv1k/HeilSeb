@@ -9,8 +9,9 @@ Suksess-scenario:
 1. Stopp-knappetrykk registreres
 2. Heisen stopper på stedet
 3. Bestillinger blir slettet, og man kan ikke ta nye bestillinger
-4. Stopp-knappen slippes eller er sluppet
-5. Heisen står i ro og kan ta i mot nye bestillinger
+4. Bestillingslysene for opp-/ned-knappene og lys for etasjebestillingene inne i heisen slukkes
+5. Stopp-knappen slippes eller er sluppet (man hopper ikke over pkt 2 og 3 selv om knappen slippes med en gang)
+6. Heisen står i ro og kan ta i mot nye bestillinger
 
 Utvidelser:
   2a. Heisen har stoppet ved en etasje
