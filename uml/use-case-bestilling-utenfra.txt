@@ -18,8 +18,8 @@ Suksess-scenario:
 8.  Døren lukkes etter et passende intervall (indikert ved dørlys av)
 
 Utvidelser:  
-  4a. Heisen har bestillinger i motsatt retning fra bestilt retning
-    4a.1  Bestillingen legges til i køen
+  4a. Heisen har allerede bestillinger i motsatt retning fra bestilt retning
+    4a.1  Den nye bestillingen legges til i køen
     4a.2  Heisen gjør ferdig aktiv bestilling
     4a.3  Hopp til punkt 4
   4b. Heisen mottar eller har mottatt en bestilling i samme retning som bestilt retning, men fra en etasje som kommer før etasjen den opprinnelige bestillingen kom fra
