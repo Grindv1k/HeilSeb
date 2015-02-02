@@ -1,0 +1,8 @@
+#ignore everything
+*
+
+#except .c source
+!*.c
+!*.h
+
+!*.txt
