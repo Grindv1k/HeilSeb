@@ -13,8 +13,9 @@ Suksess-scenario:
 3.  Etasjeindikatoren viser hvilken etasje heisen sist passerte
 4.  Heisen kjører mot etasjen som er bestilt
 5.  Heisen stopper i etasjen som er bestilt
-6.  Døren åpnes og passasjeren kan stige på (indikert ved dørlys på)
-7.  Døren lukkes etter et passende intervall (indikert ved dørlys av)
+6.	Etasjenindikatorens lys inne i heisen slukkes
+7.  Døren åpnes og passasjeren kan stige på (indikert ved dørlys på)
+8.  Døren lukkes etter et passende intervall (indikert ved dørlys av)
 
 Utvidelser:  
   4a. Heisen har bestillinger i motsatt retning fra bestilt retning

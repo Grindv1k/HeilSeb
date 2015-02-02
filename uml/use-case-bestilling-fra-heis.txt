@@ -13,8 +13,9 @@ Suksess-scenario:
 2. Heisen indikerer hvilken etasje som er bestilt
 3. Heisen kjører mot ønsket etasje
 4. Heisen stopper ved ønsket etasje
-5. Dørene åpnes og holdes åpen i et passende intervall (indikert ved lys)
-6. Passasjeren har forlatt heisen, dørene lukkes (indikert ved lys)
+5. Lyset på opp-/ned-knappen slukkes
+6. Dørene åpnes og holdes åpen i et passende intervall (indikert ved lys)
+7. Passasjeren har forlatt heisen, dørene lukkes (indikert ved lys)
 
 Utvidelser: 
   3a. En bestilling i motsatt retning ligger foran i køen
@@ -24,12 +25,12 @@ Utvidelser:
     3b.1 Bestillingen med nærmest etasjenummer i samme retning, blir utført først
     3b.2 Hopp til punkt 3
   
-  6a. Dørene lukkes ikke
-    6a.1 Av sikkerhet må ikke heisen da starte bevegelse
-    6a.2 Hopp til punkt 6
+  7a. Dørene lukkes ikke
+    7a.1 Av sikkerhet må ikke heisen da starte bevegelse
+    7a.2 Hopp til punkt 7
   
   Suksessgaranti:
     Heisen står i ro, dørene er lukket og heisen er klar for å utføre neste bestilling.
     
   Minimal garanti:
-    Heisen står stille med dørene lukket.
+    Heisen står stille.
