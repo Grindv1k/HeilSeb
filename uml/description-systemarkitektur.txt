@@ -1,0 +1,8 @@
+# Systemarkitektur
+Fra pkt 5.2 heislab.pdf:
+ * Dele opp moduler i oppgaver
+ * Moduler skal ha høy cohesion - innholdet i hver modul er naturlig og henger sammen
+ * Moduler kommuniserer kun gjennom funksjonskall og parameteroverføringer (lav coupling)
+ * Retningen til informasjonsflyten skal vises
+ * Rekkefølgen av informasjonsflyt skal vises
+ * Spesielt viktige scenarier kan også lages kommunikasjonsdiagrammer til
