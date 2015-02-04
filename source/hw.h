@@ -10,5 +10,5 @@ void hw_elevStop();
 // If the elevator is between floors, returns -1
 int hw_getCurrentFloor();
 
-// Returns 1-4 depending on floor wanted
+// Returns 0-3 depending on floor wanted
 int hw_elevGetFloorButton();
