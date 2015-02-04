@@ -5,6 +5,7 @@ void hw_elevMoveDownwards();
 void hw_elevMoveUpwards();
 void hw_elevStop();
 
+<<<<<<< HEAD
 // Current floor status
 int hw_getCurrentFloor(); 				// Returns a value 0-3 indicating which floor the elevator currently is on.
 							// If the elevator is between floors, returns -1
