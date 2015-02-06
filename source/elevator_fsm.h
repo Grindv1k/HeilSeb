@@ -5,7 +5,7 @@ void fsm_evStopButtonPressed();
 void fsm_evStopButtonReleased();
 
 void fsm_evInsideButtonRegistered(int floor); // a button for some floor (int) is registered from inside the elevator
-void fsm_evRequestButtonRegistered(int floor, dir); // a button from some floor (int) is registered, in a direction (dir)
+void fsm_evRequestButtonRegistered(int floor, elev_button_type_t); // a button from some floor (int) is registered, in a direction (dir)
 
 void fsm_evFloorReached(int);
 
