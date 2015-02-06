@@ -21,13 +21,9 @@ Utvidelser:
   3a. Heisen kjører i motsatt retning av bestillingens retning
     3a.1 Alle bestillinger i motsatt retning blir utført først
     3a.2 Hopp til punkt 3
-  3b. En bestilling i samme retning med nærmere etasjenummer ligger i køen
-    3b.1 Heisen stopper i 
+  3b. En etasje i samme retning med nærmere etasjenummer er forespurt
+    3b.1 Heisen stopper i denne etasjen på veien
     3b.2 Hopp til punkt 3
-  
-  7a. Dørene lukkes ikke
-    7a.1 Av sikkerhet må ikke heisen da starte bevegelse
-    7a.2 Hopp til punkt 7
   
   Suksessgaranti:
     Heisen står i ro, dørene er lukket og heisen er klar for å utføre neste bestilling.
