@@ -25,10 +25,6 @@ Utvidelser:
     3b.1 Heisen stopper i 
     3b.2 Hopp til punkt 3
   
-  7a. Dørene lukkes ikke
-    7a.1 Av sikkerhet må ikke heisen da starte bevegelse
-    7a.2 Hopp til punkt 7
-  
   Suksessgaranti:
     Heisen står i ro, dørene er lukket og heisen er klar for å utføre neste bestilling.
     

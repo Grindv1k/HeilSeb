@@ -1,19 +1,22 @@
 // State machine 
+void fsm_evInit(); // runs once at startup			
 
-void fsm_evCloseDoors();
-void fsm_evOpenDoors();
+void fsm_evStopButtonPressed(); 
+void fsm_evStopButtonReleased();
+
+void fsm_evInsideButtonRegistered(int floor); // a button for some floor (int) is registered from inside the elevator
+void fsm_evRequestButtonRegistered(int floor, dir); // a button from some floor (int) is registered, in a direction (dir)
+
+void fsm_evFloorReached(int);
 
 void fsm_evMoveElevDownwards();
 void fsm_evMoveElevUpwards();
 
-void fsm_evInitialFloorReached(); // Necessary? Could add floor 1 to queue during startup and let the elev stop there.
-void fsm_evFloorReached();
+void fsm_evInitialFloorReached(); // only part of the initialization
 
 void fsm_evTimeout();
 
-void fsm_evStopButtonPressed();
-void fsm_evStopButtonReleased();
 
-void fsm_evInsideButtonRegistered(int);
-void fsm_evFloorReached(int);
+
+
 
