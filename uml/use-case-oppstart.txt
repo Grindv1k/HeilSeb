@@ -11,9 +11,8 @@ Suksess-scenario:
 1.  Heisen står i ro.
 2.  Heisen kjører nedover
 3.  Heisen stopper ved første etasje den møter
-4.  Heisen står i ro ved etasjen
-5.  Dørene åpnes i et passende intervall
-6.  Dørene lukkes
+4.  Dørene åpnes i et passende intervall
+5.  Dørene lukkes
 
 Utvidelser:
   1a. Dørene er åpne

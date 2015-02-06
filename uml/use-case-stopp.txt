@@ -6,23 +6,25 @@ Trigger:
   Stopp-knappen blir trykt inn.
   
 Suksess-scenario:
-1. Stopp-knappetrykk registreres
+1. Stopp-knappen trykkes inn
 2. Heisen stopper på stedet
-3. Stopp-lampen lyser
-4. Bestillinger blir slettet, og man kan ikke ta nye bestillinger
-5. Bestillingslysene for opp-/ned-knappene og lys for etasjebestillingene inne i heisen slukkes
-6. Stopp-knappen slippes eller er sluppet (man hopper ikke over pkt 2 og 3 selv om knappen slippes med en gang)
-7. Stopp-lampen slåes av 
-8. Heisen står i ro og kan ta i mot nye bestillinger
+3. Bestillinger blir slettet, og man kan ikke ta nye bestillinger
+4. Stopp-knappen slippes
+5. Heisen står i ro
+6. Heisen kan ta i mot nye bestillinger
 
 Utvidelser:
-  2a. Heisen har stoppet ved en etasje
-    2a.1  Døren åpnes i et passende intervall
-    2a.2  Dørene lukkes
-    2a.3  Hopp til punkt 3
+  2a. Heisen står ved en etasje
+    2a.1  Dørene åpnes
+    2a.2  Hopp til punkt 5
+
+  5a. Heisen står ved en etasje og dørene er åpne
+    5a.1  Dørene forblir åpne et passende intervall
+    5a.2  Dørene lukkes
+    5a.3  Hopp til punkt 6
 
 Suksessgaranti:
-  Heisen står i ro med dørene lukket og kan ta i mot nye bestillinger.
+  Heisen står i ro og kan ta i mot nye bestillinger.
   
 Minimal garanti:
-  Heisen står i ro med dørene lukket.
+  Heisen står i ro.

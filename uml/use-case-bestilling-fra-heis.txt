@@ -18,11 +18,11 @@ Suksess-scenario:
 7. Passasjeren har forlatt heisen, dørene lukkes (indikert ved lys)
 
 Utvidelser: 
-  3a. En bestilling i motsatt retning ligger foran i køen
-    3a.1 Bestillingen i motsatt retning blir utført
+  3a. Heisen kjører i motsatt retning av bestillingens retning
+    3a.1 Alle bestillinger i motsatt retning blir utført først
     3a.2 Hopp til punkt 3
   3b. En bestilling i samme retning med nærmere etasjenummer ligger i køen
-    3b.1 Bestillingen med nærmest etasjenummer i samme retning, blir utført først
+    3b.1 Heisen stopper i 
     3b.2 Hopp til punkt 3
   
   7a. Dørene lukkes ikke
