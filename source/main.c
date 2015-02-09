@@ -7,5 +7,6 @@
 
 int main() 
 {
+    fsm_evInit();
 	return 0;
 }
