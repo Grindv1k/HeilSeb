@@ -15,6 +15,8 @@ void fsm_evFloorReached(int);
 
 void fsm_evTimeout();
 
+void fsm_evBetweenFloors();
+
 typedef enum tag_elev_door_status
 {
     DOOR_CLOSED = 0,

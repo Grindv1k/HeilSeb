@@ -81,6 +81,7 @@ void fsm_evFloorReached(int floor)
 {
     lastFloor = floor;
     elev_set_floor_indicator(floor);
+    requests_closeRequest(floor);
     
     if(currentState == ELEV_INIT)
     {
@@ -94,7 +95,19 @@ void fsm_evFloorReached(int floor)
         
         requests_enableRequesting();
     }
+    
+    if(currentState == ELEV_MOVING & requests_isFloorRequested(floor, currentDirection))
+    {
+    	elev_set_motor_direction(DIRN_STOP);
+    	currentState = ELEV_STOPPED_ON_FLOOR;
+    }
+    
+    if(currentState == ELEV_STOPPED_ON_FLOOR)
+    {
+    	
+    }
 }
+
 
 void fsm_evTimeout()
 {
