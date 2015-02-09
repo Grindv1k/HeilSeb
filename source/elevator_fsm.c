@@ -37,7 +37,7 @@ void fsm_evFloorReached(int floor)
         currentState = ELEV_STOPPED;
 
         doorStatus = DOOR_OPEN;
-        elev_set_door_lamp(doorStatus);
+        elev_set_door_open_lamp(doorStatus);
         
         // timer_start();
         
