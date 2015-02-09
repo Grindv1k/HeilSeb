@@ -11,6 +11,47 @@ void requests_enableRequesting()
     canTakeRequests = 1;
 }
 
+void requests_disableRequesting()
+{
+    canTakeRequests = 0;
+}
+
+void requests_requestFloor(int floor, elev_button_type_t buttonType)
+{
+    if(buttonType == BUTTON_CALL_UP)
+    {
+        floorRequests[floor] |= FLOOR_STOP_UP;
+    }
+    else if(buttonType == BUTTON_CALL_DOWN)
+    {
+        floorRequests[floor] |= FLOOR_STOP_DOWN;
+    }
+    else if(buttonType == BUTTON_COMMAND)
+    {
+        floorRequest[floor] |= FLOOR_STOP_ALL;
+    }
+}
+
+void requests_isFloorRequested(int floor, elev_motor_direction_t dir)
+{
+    if(dir == DIRN_UP)
+    {
+        return floorRequests[floor] & FLOOR_STOP_UP;
+    }
+
+    if(dir == DIRN_DOWN)
+    {
+        return floorRequests[floor] & FLOOR_STOP_DOWN;
+    }
+
+    return 0;
+}
+
+void requests_closeRequest(int floor)
+{
+    floorRequests[floor] = FLOOR_STOP_NONE;
+}
+
 void requests_clearAllRequests()
 {
     for(int i = 0; i < FLOOR_COUNT; i++)
