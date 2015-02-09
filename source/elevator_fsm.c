@@ -17,7 +17,7 @@ void fsm_evInit()
 
     elev_init();
     
-    // requests_clearAllRequests();
+    requests_clearAllRequests();
     
     doorStatus = DOOR_CLOSED;
     elev_set_door_open_lamp(doorStatus);
@@ -41,7 +41,7 @@ void fsm_evFloorReached(int floor)
         
         timer_start();
         
-        // requests_enableRequesting();
+        requests_enableRequesting();
     }
 }
 
