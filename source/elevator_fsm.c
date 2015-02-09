@@ -26,6 +26,55 @@ void fsm_evInit()
     elev_set_motor_direction(currentDirection);
 }
 
+void fsm_evStopButtonPressed()
+{
+	if(currentState == ELEV_INIT)
+	{
+		return;
+	}
+
+	elev_set_motor_direction(DIRN_STOP);
+	elev_set_stop_lamp(1);
+	requests_clearAllRequests();
+	requests_disableRequesting();
+
+	if(currentState == ELEV_STOPPED_ON_FLOOR)
+	{
+		doorStatus = DOOR_OPEN;
+    	elev_set_door_open_lamp(doorStatus);
+		currentState = ELEV_EMERGENCY_STOP_ON_FLOOR;
+	}
+	else if(currentState == ELEV_MOVING)
+	{
+		currentState = ELEV_EMERGENCY_STOP_BETWEEN_FLOORS;
+	}
+}
+
+void fsm_evStopButtonReleased()
+{
+	if(currentState == ELEV_INIT)
+	{
+		return;
+	}
+
+	elev_set_stop_lamp(0);
+	requests_enableRequesting();
+
+	if(currentState == ELEV_EMERGENCY_STOP_ON_FLOOR)
+	{
+		timer_start();
+		currentState = ELEV_STOPPED_ON_FLOOR;
+	}
+	else if(currentState == ELEV_EMERGENCY_STOP_BETWEEN_FLOORS)
+	{
+		currentState = ELEV_STOPPED_BETWEEN_FLOORS;
+	}
+}
+
+void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
+{
+}
+
 void fsm_evFloorReached(int floor)
 {
     lastFloor = floor;
@@ -34,7 +83,7 @@ void fsm_evFloorReached(int floor)
     if(currentState == ELEV_INIT)
     {
         elev_set_motor_direction(DIRN_STOP);
-        currentState = ELEV_STOPPED;
+        currentState = ELEV_STOPPED_ON_FLOOR;
 
         doorStatus = DOOR_OPEN;
         elev_set_door_open_lamp(doorStatus);
@@ -45,7 +94,7 @@ void fsm_evFloorReached(int floor)
     }
 }
 
-void fsm_evTimeOut()
+void fsm_evTimeout()
 {
     doorStatus = DOOR_CLOSED;
     elev_set_door_open_lamp(doorStatus);
@@ -53,12 +102,7 @@ void fsm_evTimeOut()
     timer_stop();
 }
 
-/*void fsm_evInsideButtonRegistered(int floor)
-{
-	elev_set_button_lamp(BUTTON_COMMAND, int floor)
-	requests_requestFloor(int floor, BUTTON_COMMAND)
-}
-*/
+
 
 
 

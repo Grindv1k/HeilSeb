@@ -1,7 +1,7 @@
 #include <sys/time.h>
 #include "timer.h"
 
-double lastTimeStamp;
+double lastTimeStamp = 0.0;
 
 double get_wall_time(void)
 {
@@ -22,6 +22,12 @@ void timer_stop()
 
 int timer_isTimeout()
 {
+	if(lastTimeStamp == 0.0)
+	{
+		return 0;
+	}
+
+
     double diff = get_wall_time() - lastTimeStamp;
     
     if(diff < 0)

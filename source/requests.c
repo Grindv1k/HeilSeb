@@ -1,7 +1,6 @@
 #include "elev.h"
 #include "requests.h"
-
-#define FLOOR_COUNT 4
+#include "elevator_fsm.h"
 
 int canTakeRequests = 0;
 floor_request_status_t floorRequests[FLOOR_COUNT];
