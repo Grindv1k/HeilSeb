@@ -39,7 +39,7 @@ void fsm_evFloorReached(int floor)
         doorStatus = DOOR_OPEN;
         elev_set_door_open_lamp(doorStatus);
         
-        // timer_start();
+        timer_start();
         
         // requests_enableRequesting();
     }
@@ -50,6 +50,6 @@ void fsm_evTimeOut()
     doorStatus = DOOR_CLOSED;
     elev_set_door_open_lamp(doorStatus);
 
-    // timer_stop();
+    timer_stop();
 }
 
