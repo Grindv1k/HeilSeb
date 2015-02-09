@@ -25,7 +25,7 @@ void requests_requestFloor(int floor, elev_button_type_t buttonType)
 
     if(buttonType == BUTTON_CALL_UP)
     {
-        floorRequests[floor] |= FLOOR_STOP_UP;
+        floorRequests[floor] |= FLOOR_STOP_UP; 
     }
     else if(buttonType == BUTTON_CALL_DOWN)
     {

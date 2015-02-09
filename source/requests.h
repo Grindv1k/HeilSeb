@@ -13,7 +13,7 @@ typedef enum tag_floor_request_status
     FLOOR_STOP_NONE = 0,
     FLOOR_STOP_UP = 1,
     FLOOR_STOP_DOWN = 2,
-    FLOOR_STOP_ALL = 4
+    FLOOR_STOP_ALL = 3
 } floor_request_status_t;
 
 #endif
