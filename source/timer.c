@@ -6,7 +6,7 @@ double lastTimeStamp;
 double get_wall_time(void)
 {
     struct timeval time;
-    gettimeofday(&time, NULL);
+    gettimeofday(&time, 0);
     return (double)time.tv_sec + (double)time.tv_usec * .000001;
 }
 
