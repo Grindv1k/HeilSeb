@@ -14,7 +14,7 @@ elev_state_t currentState;
 void fsm_evInit()
 {
     elev_init();
-    elev_set_door_open_lamp();
+    elev_set_door_open_lamp(1);
 
     currentDirection = DIRN_DOWN;
     elev_set_motor_direction(currentDirection);
