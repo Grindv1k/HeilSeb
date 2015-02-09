@@ -29,7 +29,8 @@ int main()
         {
             fsm_evFloorReached(currentFloor);   
         }
-        if(timer_isTimeout())
+        
+		if(timer_isTimeout())
         {
             fsm_evTimeout();
         }

@@ -66,5 +66,14 @@ void requests_clearAllRequests()
     for(int i = 0; i < FLOOR_COUNT; i++)
     {
         floorRequests[i] = FLOOR_STOP_NONE;
+		elev_set_button_lamp(BUTTON_COMMAND, i, 0);
+		if(i > 0)
+			{
+				elev_set_button_lamp(BUTTON_CALL_DOWN, i, 0);
+			}
+		if(i < FLOOR_COUNT - 1)
+			{
+				elev_set_button_lamp(BUTTON_CALL_UP, i, 0);	
+			}
     }
 }
