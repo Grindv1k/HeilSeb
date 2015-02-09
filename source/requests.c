@@ -32,7 +32,7 @@ void requests_requestFloor(int floor, elev_button_type_t buttonType)
     }
 }
 
-void requests_isFloorRequested(int floor, elev_motor_direction_t dir)
+int requests_isFloorRequested(int floor, elev_motor_direction_t dir)
 {
     if(dir == DIRN_UP)
     {
