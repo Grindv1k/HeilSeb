@@ -8,5 +8,15 @@
 int main() 
 {
     fsm_evInit();
-	return 0;
+	
+    while(1)
+    {
+        int floor = elev_get_floor_sensor_signal();
+        if(floor >= 0)
+        {
+            fsm_floorReached(floor);   
+        }
+    }
+
+    return 0;
 }
