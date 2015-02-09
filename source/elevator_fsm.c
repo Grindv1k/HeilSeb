@@ -53,3 +53,12 @@ void fsm_evTimeOut()
     timer_stop();
 }
 
+/*void fsm_evInsideButtonRegistered(int floor)
+{
+	elev_set_button_lamp(BUTTON_COMMAND, int floor)
+	requests_requestFloor(int floor, BUTTON_COMMAND)
+}
+*/
+
+
+
