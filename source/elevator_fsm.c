@@ -24,7 +24,7 @@ void fsm_evInit()
 
 void fsm_evFloorReached(int floor)
 {
-    currentFloor = floor;
+    lastFloor = floor;
     elev_set_floor_indicator(floor);
     elev_set_motor_direction(DIRN_STOP);
 
