@@ -34,5 +34,7 @@ int timer_isTimeout()
     {
         return 1;
     }
+
+    return 0;
 }
 
