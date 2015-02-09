@@ -14,7 +14,7 @@ int main()
         int currentFloor = elev_get_floor_sensor_signal();
         if(currentFloor >= 0) // Floor reached
         {
-            fsm_floorReached(currentFloor);   
+            fsm_evFloorReached(currentFloor);   
         }
     }
 
