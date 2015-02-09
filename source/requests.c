@@ -18,6 +18,11 @@ void requests_disableRequesting()
 
 void requests_requestFloor(int floor, elev_button_type_t buttonType)
 {
+    if(!canTakeRequests)
+    {
+        return;
+    }
+
     if(buttonType == BUTTON_CALL_UP)
     {
         floorRequests[floor] |= FLOOR_STOP_UP;
@@ -34,6 +39,11 @@ void requests_requestFloor(int floor, elev_button_type_t buttonType)
 
 int requests_isFloorRequested(int floor, elev_motor_direction_t dir)
 {
+    if(!canTakeRequests)
+    {
+        return 0;
+    }
+
     if(dir == DIRN_UP)
     {
         return floorRequests[floor] & FLOOR_STOP_UP;
