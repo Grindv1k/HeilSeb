@@ -13,7 +13,7 @@ elev_state_t currentState;
 
 void fsm_evInit()
 {
-    currentStatus = ELEV_INIT;
+    currentState = ELEV_INIT;
 
     elev_init();
     elev_set_door_open_lamp(0);
@@ -28,6 +28,6 @@ void fsm_evFloorReached(int floor)
     elev_set_floor_indicator(floor);
     elev_set_motor_direction(DIRN_STOP);
 
-    currentStatus = ELEV_STOPPED;
+    currentState = ELEV_STOPPED;
 }
 
