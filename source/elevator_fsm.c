@@ -72,6 +72,11 @@ void fsm_evStopButtonReleased()
 	}
 }
 
+int sign(int val)
+{
+    return (val > 0) - (val < 0);
+}
+
 void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 {
 	elev_set_button_lamp(buttonType, floor, 1);
@@ -105,7 +110,7 @@ void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
         }
         else
         {
-            currentDirection = floorDiff;
+            currentDirection = sign(floorDiff);
         }
     
         elev_set_motor_direction(currentDirection);
