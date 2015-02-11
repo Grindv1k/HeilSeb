@@ -1,12 +1,13 @@
 #ifndef __REQUESTS_H__
 #define __REQUESTS_H__
 
-void requests_enableRequesting();			// 
-void requests_clearAllRequests();			// 
-void requests_disableRequesting();			//
-void requests_requestFloor(int floor, elev_button_type_t buttonType);		//
-int requests_isFloorRequested(int floor, elev_motor_direction_t dir);		// 
-void requests_closeRequest(int floor);			//
+void requests_enableRequesting();			
+void requests_clearAllRequests();			
+void requests_disableRequesting();			
+void requests_requestFloor(int floor, elev_button_type_t buttonType);		
+int requests_isFloorRequested(int floor, elev_motor_direction_t dir);		
+void requests_closeRequest(int floor);		
+int requests_existsRequestsInDirection(int lastFloor, elev_motor_direction_t dir);	
 
 typedef enum tag_floor_request_status
 {
