@@ -76,7 +76,7 @@ void fsm_evStopButtonReleased()
 void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 {
     if(currentState == ELEV_INIT || 
-        currentState == EMERGENCY_STOP_ON_FLOOR || currentState == EMERGENCY_STOP_BETWEEN_FLOORS)
+        currentState == ELEV_EMERGENCY_STOP_ON_FLOOR || currentState == ELEV_EMERGENCY_STOP_BETWEEN_FLOORS)
     {
         return;
     }   
