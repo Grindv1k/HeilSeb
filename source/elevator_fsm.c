@@ -165,6 +165,11 @@ void fsm_evTimeout()
     doorStatus = DOOR_CLOSED;
     elev_set_door_open_lamp(doorStatus);
 
+void fsm_evTimeout()
+{
+    doorStatus = DOOR_CLOSED;
+    elev_set_door_open_lamp(doorStatus);
+
     timer_stop();
 
     if(requests_existsRequestsInDirection(lastFloor, currentDirection))
@@ -183,8 +188,3 @@ void fsm_evTimeout()
         currentState = ELEV_IDLE;
     }
 }
-
-
-
-
-
