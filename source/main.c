@@ -25,7 +25,7 @@ int main()
 			fsm_evStopButtonReleased();
 		}
 
-		lastFrameStopButtonState = currentFrameStopButtonSignal;
+		lastFrameStopButtonState = currentFrameStopButtonState;
 
         int currentFloor = elev_get_floor_sensor_signal();
         if(currentFloor >= 0) // Floor reached
