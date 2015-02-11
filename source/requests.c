@@ -77,3 +77,16 @@ void requests_clearAllRequests()
 			}
     }
 }
+
+int requests_existsRequestsInDirection(int floor, elev_motor_direction_t dir)
+{
+    for(int i = floor; i < FLOOR_COUNT && i >= 0; i += dir)
+    {
+        if(requests_isFloorRequested(i, dir))
+        {
+            return 1;
+        }       
+    }
+
+    return 0;
+}
