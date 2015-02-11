@@ -108,7 +108,8 @@ void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 
         if(floorDiff == 0)
         {
-            currentDirection *= -1; 
+            currentDirection *= -1;
+            lastFloor = lastFloor - currentDirection; 
         }
         else
         {
