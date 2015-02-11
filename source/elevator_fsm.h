@@ -26,6 +26,7 @@ typedef enum tag_elev_door_status
 typedef enum tag_elev_state
 {
     ELEV_INIT,
+    ELEV_IDLE,
     ELEV_MOVING,
     ELEV_STOPPED_ON_FLOOR,
 	ELEV_STOPPED_BETWEEN_FLOORS,

@@ -76,6 +76,26 @@ void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 {
 	elev_set_button_lamp(buttonType, floor, 1);
 	requests_requestFloor(floor, buttonType);
+    
+    if(currentState != ELEV_IDLE || doorState == DOORS_OPEN)
+    {
+        return;
+    }
+
+    if(floor == lastFloor)
+    {
+        doorStatus = DOOR_OPEN;
+        elev_set_door_open_lamp(doorStatus);
+
+        timer_start();
+    }
+    else
+    {
+        currentDirection = floor - lastFloor;
+    
+        elev_set_motor_direction(currentDirection);
+        currentState = ELEV_MOVING;
+    }
 }
 
 void fsm_evFloorReached(int floor)
@@ -136,6 +156,10 @@ void fsm_evTimeout()
         currentState = ELEV_MOVING;
         currentDirection *= -1;
         elev_set_motor_direction(currentDirection);
+    }
+    else
+    {
+        currentState = ELEV_IDLE;
     }
 }
 
