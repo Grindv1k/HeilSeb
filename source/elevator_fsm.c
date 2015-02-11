@@ -75,6 +75,11 @@ void fsm_evStopButtonReleased()
 
 void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 {
+    if(currentState = ELEV_INIT)
+    {
+        return;
+    }   
+
 	elev_set_button_lamp(buttonType, floor, 1);
 	requests_requestFloor(floor, buttonType);
     
