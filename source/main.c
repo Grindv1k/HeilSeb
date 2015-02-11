@@ -10,19 +10,22 @@ int main()
     fsm_evInit();
 
 	int lastFrameStopButtonState = 0;
+    int currentFrameStopButtonState = 0;
 
     while(1)
     {
-		if(elev_get_stop_signal() && !lastFrameStopButtonState)
+        currentFrameStopButtonState = elev_get_stop_button_signal();
+
+		if(currentFrameStopButtonState && !lastFrameStopButtonState)
 		{
 			fsm_evStopButtonPressed();
 		}
-		else if(!elev_get_stop_signal() && lastFrameStopButtonState)
+		else if(!currentFrameStopButtonState && lastFrameStopButtonState)
 		{
 			fsm_evStopButtonReleased();
 		}
 
-		lastFrameStopButtonState = elev_get_stop_signal();
+		lastFrameStopButtonState = currentFrameStopButtonSignal;
 
         int currentFloor = elev_get_floor_sensor_signal();
         if(currentFloor >= 0) // Floor reached
