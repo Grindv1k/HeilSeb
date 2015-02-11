@@ -38,7 +38,7 @@ void fsm_evStopButtonPressed()
 	requests_clearAllRequests();
 	requests_disableRequesting();
 
-	if(currentState == ELEV_STOPPED_ON_FLOOR ||| currentState == ELEV_IDLE)
+	if(currentState == ELEV_STOPPED_ON_FLOOR || currentState == ELEV_IDLE)
 	{
 		doorStatus = DOOR_OPEN;
     	elev_set_door_open_lamp(doorStatus);
