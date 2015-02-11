@@ -15,6 +15,19 @@ void requests_disableRequesting()
     canTakeRequests = 0;
 }
 
+int requests_isRequestsEmpty()
+{
+    for(int i = 0; i < FLOOR_COUNT; i++)
+    {
+        if(floorRequests[i] != FLOOR_STOP_NONE)
+		{
+			return 0;
+		}
+    }
+
+	return 1;
+}
+
 void requests_requestFloor(int floor, elev_button_type_t buttonType)
 {
     if(!canTakeRequests)
@@ -22,18 +35,25 @@ void requests_requestFloor(int floor, elev_button_type_t buttonType)
         return;
     }
 
-    if(buttonType == BUTTON_CALL_UP)
-    {
-        floorRequests[floor] |= FLOOR_STOP_UP; 
-    }
-    else if(buttonType == BUTTON_CALL_DOWN)
-    {
-        floorRequests[floor] |= FLOOR_STOP_DOWN;
-    }
-    else if(buttonType == BUTTON_COMMAND)
-    {
-        floorRequests[floor] |= FLOOR_STOP_ALL;
-    }
+	if(requests_isRequestsEmpty() || floor == 0 || floor == FLOOR_COUNT - 1)
+	{
+		floorRequests[floor] = FLOOR_STOP_ALL;
+	}
+	else
+	{
+		if(buttonType == BUTTON_CALL_UP)
+		{
+		    floorRequests[floor] |= FLOOR_STOP_UP; 
+		}
+		else if(buttonType == BUTTON_CALL_DOWN)
+		{
+		    floorRequests[floor] |= FLOOR_STOP_DOWN;
+		}
+		else if(buttonType == BUTTON_COMMAND)
+		{
+		    floorRequests[floor] |= FLOOR_STOP_ALL;
+		}
+	}
 }
 
 int requests_isFloorRequested(int floor, elev_motor_direction_t dir)

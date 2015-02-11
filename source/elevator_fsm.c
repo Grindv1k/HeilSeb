@@ -72,10 +72,6 @@ void fsm_evStopButtonReleased()
 	}
 }
 
-int sign(int val)
-{
-    return (val > 0) - (val < 0);
-}
 
 void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 {
@@ -110,7 +106,7 @@ void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
         }
         else
         {
-            currentDirection = sign(floorDiff);
+            currentDirection = (floorDiff > 0) - (floorDiff < 0); // the sign of floorDiff
         }
     
         elev_set_motor_direction(currentDirection);
@@ -158,12 +154,6 @@ void fsm_evFloorReached(int floor)
         timer_start();
     }
 }
-
-
-void fsm_evTimeout()
-{
-    doorStatus = DOOR_CLOSED;
-    elev_set_door_open_lamp(doorStatus);
 
 void fsm_evTimeout()
 {
