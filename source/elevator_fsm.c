@@ -98,7 +98,17 @@ void fsm_evFloorReached(int floor)
     
     if(currentState == ELEV_MOVING && requests_isFloorRequested(floor, currentDirection))
     {
-        requests_closeRequest(lastFloor);
+        requests_closeRequest(floor);
+        elev_set_button_lamp(BUTTON_COMMAND, floor, 0);
+        
+        if(floor < FLOOR_COUNT - 1)
+        {
+            elev_set_button_lamp(BUTTON_CALL_UP, floor, 0);        
+        }
+        if(floor > 0)
+        {
+            elev_set_button_lamp(BUTTON_CALL_DOWN, floor, 0);        
+        }
 
     	elev_set_motor_direction(DIRN_STOP);
     	currentState = ELEV_STOPPED_ON_FLOOR;
