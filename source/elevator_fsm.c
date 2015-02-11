@@ -43,6 +43,7 @@ void fsm_evStopButtonPressed()
 		doorStatus = DOOR_OPEN;
     	elev_set_door_open_lamp(doorStatus);
 		currentState = ELEV_EMERGENCY_STOP_ON_FLOOR;
+        timer_stop();
 	}
 	else if(currentState == ELEV_MOVING)
 	{
