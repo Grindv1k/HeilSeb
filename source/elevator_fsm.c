@@ -77,7 +77,7 @@ void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 	elev_set_button_lamp(buttonType, floor, 1);
 	requests_requestFloor(floor, buttonType);
     
-    if(currentState != ELEV_IDLE || doorState == DOORS_OPEN)
+    if(currentState != ELEV_IDLE || doorStatus == DOOR_OPEN)
     {
         return;
     }

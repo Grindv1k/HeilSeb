@@ -11,8 +11,7 @@ int main()
 
 	int lastFrameStopButtonState = 0;
     int currentFrameStopButtonState = 0;
-
-    while(1)
+	while(1)
     {
         currentFrameStopButtonState = elev_get_stop_signal();
 
