@@ -131,7 +131,7 @@ void fsm_evFloorReached(int floor)
         requests_enableRequesting();
     }
     
-    if((currentState == ELEV_MOVING || currentState == ELEV_IDLE || currentState == ELEV_STOPPED)
+    if((currentState == ELEV_MOVING || currentState == ELEV_IDLE || currentState == ELEV_STOPPED_ON_FLOOR)
          && requests_isFloorRequested(floor, currentDirection))
     {
         requests_closeRequest(floor);
