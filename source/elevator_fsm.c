@@ -45,7 +45,7 @@ void fsm_evStopButtonPressed()
 		currentState = ELEV_EMERGENCY_STOP_ON_FLOOR;
         timer_stop();
 	}
-	else if(currentState == ELEV_MOVING)
+	else if(currentState == ELEV_MOVING || currentState == ELEV_STOPPED_BETWEEN_FLOORS)
 	{
 		currentState = ELEV_EMERGENCY_STOP_BETWEEN_FLOORS;
 	}
@@ -64,7 +64,7 @@ void fsm_evStopButtonReleased()
 	if(currentState == ELEV_EMERGENCY_STOP_ON_FLOOR)
 	{
 		timer_start();
-		currentState = ELEV_STOPPED_ON_FLOOR;
+		currentState = ELEV_IDLE;
 	}
 	else if(currentState == ELEV_EMERGENCY_STOP_BETWEEN_FLOORS)
 	{
