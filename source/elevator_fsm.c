@@ -81,7 +81,6 @@ void fsm_evFloorReached(int floor)
 {
     lastFloor = floor;
     elev_set_floor_indicator(floor);
-    requests_closeRequest(floor);
     
     if(currentState == ELEV_INIT)
     {
@@ -96,15 +95,15 @@ void fsm_evFloorReached(int floor)
         requests_enableRequesting();
     }
     
-    if(currentState == ELEV_MOVING & requests_isFloorRequested(floor, currentDirection))
+    if(currentState == ELEV_MOVING && requests_isFloorRequested(floor, currentDirection))
     {
+        requests_closeRequest(lastFloor);
+
     	elev_set_motor_direction(DIRN_STOP);
     	currentState = ELEV_STOPPED_ON_FLOOR;
-    }
-    
-    if(currentState == ELEV_STOPPED_ON_FLOOR)
-    {
-    	
+        doorStatus = DOOR_OPEN;
+        elev_set_door_open_lamp(doorStatus);
+        timer_start();
     }
 }
 
@@ -115,6 +114,18 @@ void fsm_evTimeout()
     elev_set_door_open_lamp(doorStatus);
 
     timer_stop();
+
+    if(requests_existsRequestsInDirection(lastFloor, currentDirection))
+    {
+        currentState = ELEV_MOVING;
+        elev_set_motor_direction(currentDirection);   
+    }
+    else if(requests_existsRequestsInDirection(lastFloor, -currentDirection))
+    {
+        currentState = ELEV_MOVING;
+        currentDirection *= -1;
+        elev_set_motor_direction(currentDirection);
+    }
 }
 
 
