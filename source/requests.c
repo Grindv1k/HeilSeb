@@ -28,6 +28,19 @@ int requests_isRequestsEmpty()
 	return 1;
 }
 
+int requests_isOnlyRequest(int floor, elev_motor_direction_t dir)
+{
+    for(int i = floor; i < FLOOR_COUNT && i >= 0; i += dir)
+    {
+        if(i != floor && floorRequests[i] != FLOOR_STOP_NONE)
+		{
+			return 0;
+		}
+    }
+
+	return floorRequests[floor] != FLOOR_STOP_NONE;
+}
+
 void requests_requestFloor(int floor, elev_button_type_t buttonType)
 {
     if(!canTakeRequests)
@@ -35,9 +48,9 @@ void requests_requestFloor(int floor, elev_button_type_t buttonType)
         return;
     }
 
-	if(requests_isRequestsEmpty() || floor == 0 || floor == FLOOR_COUNT - 1)
+	if(floor == 0 || floor == FLOOR_COUNT - 1)
 	{
-		floorRequests[floor] = FLOOR_STOP_ALL;
+		floorRequests[floor] |= FLOOR_STOP_ALL;
 	}
 	else
 	{
@@ -62,6 +75,11 @@ int requests_isFloorRequested(int floor, elev_motor_direction_t dir)
     {
         return 0;
     }
+
+	if(requests_isOnlyRequest(floor, dir))
+	{
+		return 1;
+	}
 
     if(dir == DIRN_UP)
     {

@@ -9,13 +9,13 @@ void fsm_evInit(); // runs once at startup
 void fsm_evStopButtonPressed(); 
 void fsm_evStopButtonReleased();
 
-void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType); // a button from inside the elevator, or from some floor in a direction.
+// a button from inside the elevator, or from some floor in a direction.
+void fsm_evRequestButtonPressed(int requestedFloor, elev_button_type_t buttonType); 
 
-void fsm_evFloorReached(int);
+void fsm_evArriveFloorSignal(int floor);
+void fsm_evLeaveFloorSignal();
 
 void fsm_evTimeout();
-
-void fsm_evBetweenFloors();
 
 typedef enum tag_elev_door_status
 {

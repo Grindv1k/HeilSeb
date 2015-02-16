@@ -11,6 +11,10 @@ int main()
 
 	int lastFrameStopButtonState = 0;
     int currentFrameStopButtonState = 0;
+
+	int lastFrameFloorSensorState = -1;
+    int currentFrameFloorSensorState = -1;
+
 	while(1)
     {
         currentFrameStopButtonState = elev_get_stop_signal();
@@ -26,12 +30,20 @@ int main()
 
 		lastFrameStopButtonState = currentFrameStopButtonState;
 
-        int currentFloor = elev_get_floor_sensor_signal();
-        if(currentFloor >= 0) // Floor reached
-        {
-            fsm_evFloorReached(currentFloor);   
-        }
+
+        currentFrameFloorSensorState = elev_get_floor_sensor_signal();
+
+		if(currentFrameFloorSensorState >= 0 && lastFrameFloorSensorState < 0)
+		{
+            fsm_evArriveFloorSignal(currentFrameFloorSensorState);  
+		}
+		else if(currentFrameFloorSensorState < 0 && lastFrameFloorSensorState >= 0)
+		{
+			fsm_evLeaveFloorSignal();
+		}
+		lastFrameFloorSensorState = currentFrameFloorSensorState;
         
+
 		if(timer_isTimeout())
         {
             fsm_evTimeout();
@@ -42,17 +54,17 @@ int main()
 		{ 
 			if(elev_get_button_signal(BUTTON_COMMAND, i))
 			{
-				fsm_evRequestButtonRegistered(i, BUTTON_COMMAND);
+				fsm_evRequestButtonPressed(i, BUTTON_COMMAND);
 			}
 
 			if(i < FLOOR_COUNT - 1 && elev_get_button_signal(BUTTON_CALL_UP, i))
 			{
-				fsm_evRequestButtonRegistered(i, BUTTON_CALL_UP);
+				fsm_evRequestButtonPressed(i, BUTTON_CALL_UP);
 			}
 
 			if(i > 0 && elev_get_button_signal(BUTTON_CALL_DOWN, i))
 			{
-				fsm_evRequestButtonRegistered(i, BUTTON_CALL_DOWN);
+				fsm_evRequestButtonPressed(i, BUTTON_CALL_DOWN);
 			}
 		}
     }

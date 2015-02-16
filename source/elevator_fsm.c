@@ -4,19 +4,19 @@
 #include "timer.h"
 #include "requests.h"
 
-int lastFloor;
+int lastPassedFloor;
+int isCurrentlyOnFloor;
 
-elev_motor_direction_t currentDirection;
-
-elev_door_status_t doorStatus;
-
-elev_state_t currentState;
+elev_motor_direction_t 	currentDirection;
+elev_door_status_t 		doorStatus;
+elev_state_t 			currentState;
 
 void fsm_evInit()
 {
     currentState = ELEV_INIT;
-
     elev_init();
+
+	isCurrentlyOnFloor = 0;
     
     requests_clearAllRequests();
     
@@ -36,17 +36,20 @@ void fsm_evStopButtonPressed()
 
 	elev_set_motor_direction(DIRN_STOP);
 	elev_set_stop_lamp(1);
+
 	requests_clearAllRequests();
 	requests_disableRequesting();
 
-	if(currentState == ELEV_STOPPED_ON_FLOOR || currentState == ELEV_IDLE)
+	if(isCurrentlyOnFloor)
 	{
 		doorStatus = DOOR_OPEN;
     	elev_set_door_open_lamp(doorStatus);
+
 		currentState = ELEV_EMERGENCY_STOP_ON_FLOOR;
+
         timer_stop();
 	}
-	else if(currentState == ELEV_MOVING || currentState == ELEV_STOPPED_BETWEEN_FLOORS)
+	else
 	{
 		currentState = ELEV_EMERGENCY_STOP_BETWEEN_FLOORS;
 	}
@@ -60,6 +63,7 @@ void fsm_evStopButtonReleased()
 	}
 
 	elev_set_stop_lamp(0);
+
 	requests_enableRequesting();
 
 	if(currentState == ELEV_EMERGENCY_STOP_ON_FLOOR)
@@ -74,7 +78,7 @@ void fsm_evStopButtonReleased()
 }
 
 
-void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
+void fsm_evRequestButtonPressed(int requestedFloor, elev_button_type_t buttonType)
 {
     if(currentState == ELEV_INIT || 
         currentState == ELEV_EMERGENCY_STOP_ON_FLOOR || 
@@ -83,53 +87,67 @@ void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
         return;
     }
 
-	elev_set_button_lamp(buttonType, floor, 1);
-	requests_requestFloor(floor, buttonType);
-    
-    if(doorStatus == DOOR_OPEN || 
-		currentState == ELEV_STOPPED_ON_FLOOR ||
-		currentState == ELEV_MOVING)
-    {
-        return;
-    }	
-
-    int floorDiffSign = (floor - lastFloor > 0) - 
-						(floor - lastFloor < 0); // the sign of the floor difference
-
-    if(floorDiffSign)
-    {
-		if(currentState == ELEV_STOPPED_BETWEEN_FLOORS && currentDirection + floorDiffSign == 0)
+	if(isCurrentlyOnFloor && requestedFloor == lastPassedFloor)
+	{
+		if(requests_isRequestsEmpty())
 		{
-			lastFloor += currentDirection;
+			doorStatus = DOOR_OPEN;
+			elev_set_door_open_lamp(doorStatus);
+
+			timer_start();
 		}
+		return;
+	}
 
-        currentDirection = floorDiffSign;
-    }
-    else
+	elev_set_button_lamp(buttonType, requestedFloor, 1);
+	requests_requestFloor(requestedFloor, buttonType);
+    
+    if(doorStatus != DOOR_OPEN &&
+		(currentState == ELEV_STOPPED_BETWEEN_FLOORS || currentState == ELEV_IDLE))
     {
-		if(currentState == ELEV_IDLE)
-		{
-		    doorStatus = DOOR_OPEN;
-		    elev_set_door_open_lamp(doorStatus);
+		// The sign of the difference between the requested floor and last floor
+		int floorDiffSign = (requestedFloor - lastPassedFloor > 0) - 
+							(requestedFloor - lastPassedFloor < 0); 
 
-		    timer_start();
-		    
-		    return;
+		if(floorDiffSign)
+		{
+			if(currentState == ELEV_STOPPED_BETWEEN_FLOORS && currentDirection + floorDiffSign == 0)
+			{
+				lastPassedFloor += currentDirection;
+			}
+
+		    currentDirection = floorDiffSign;
 		}
 		else
 		{
-        	currentDirection *= -1;	
-			lastFloor -= currentDirection;
-		}
-    }
+			if(currentState == ELEV_STOPPED_BETWEEN_FLOORS)
+			{
+		    	currentDirection *= -1;	
+				lastPassedFloor -= currentDirection;
+			}
+			/*else if(currentState == ELEV_IDLE)
+			{
+				// If the elevator is idle (no requests) and 
+				// the requested floor is the same as last floor, just open doors.
 
-    elev_set_motor_direction(currentDirection);
-    currentState = ELEV_MOVING;
+				doorStatus = DOOR_OPEN;
+				elev_set_door_open_lamp(doorStatus);
+
+				timer_start();
+				
+				return;
+			}*/
+		}
+
+		elev_set_motor_direction(currentDirection);
+		currentState = ELEV_MOVING;
+	}
 }
 
-void fsm_evFloorReached(int floor)
+void fsm_evArriveFloorSignal(int floor)
 {
-    lastFloor = floor;
+	isCurrentlyOnFloor = 1;
+    lastPassedFloor = floor;
     elev_set_floor_indicator(floor);
     
     if(currentState == ELEV_INIT)
@@ -144,10 +162,8 @@ void fsm_evFloorReached(int floor)
         
         requests_enableRequesting();
     }
-    
-    if((currentState == ELEV_MOVING || currentState == ELEV_IDLE || currentState == ELEV_STOPPED_ON_FLOOR)
-         && requests_isFloorRequested(floor, currentDirection))
-    {
+	else if(requests_isFloorRequested(floor, currentDirection))    
+	{
         requests_closeRequest(floor);
         elev_set_button_lamp(BUTTON_COMMAND, floor, 0);
         
@@ -162,11 +178,19 @@ void fsm_evFloorReached(int floor)
 
     	elev_set_motor_direction(DIRN_STOP);
     	currentState = ELEV_STOPPED_ON_FLOOR;
+
         doorStatus = DOOR_OPEN;
         elev_set_door_open_lamp(doorStatus);
+
         timer_start();
     }
 }
+
+void fsm_evLeaveFloorSignal()
+{
+	isCurrentlyOnFloor = 0;
+}
+
 
 void fsm_evTimeout()
 {
@@ -175,12 +199,12 @@ void fsm_evTimeout()
 
     timer_stop();
 
-    if(requests_existsRequestsInDirection(lastFloor, currentDirection))
+    if(requests_existsRequestsInDirection(lastPassedFloor, currentDirection))
     {
         currentState = ELEV_MOVING;
         elev_set_motor_direction(currentDirection);   
     }
-    else if(requests_existsRequestsInDirection(lastFloor, -currentDirection))
+    else if(requests_existsRequestsInDirection(lastPassedFloor, -currentDirection))
     {
         currentState = ELEV_MOVING;
         currentDirection *= -1;
