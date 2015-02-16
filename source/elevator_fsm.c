@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "elev.h"
 #include "elevator_fsm.h"
 #include "timer.h"
@@ -76,49 +77,54 @@ void fsm_evStopButtonReleased()
 void fsm_evRequestButtonRegistered(int floor, elev_button_type_t buttonType)
 {
     if(currentState == ELEV_INIT || 
-        currentState == ELEV_EMERGENCY_STOP_ON_FLOOR || currentState == ELEV_EMERGENCY_STOP_BETWEEN_FLOORS)
+        currentState == ELEV_EMERGENCY_STOP_ON_FLOOR || 
+		currentState == ELEV_EMERGENCY_STOP_BETWEEN_FLOORS)
     {
         return;
-    }   
+    }
 
 	elev_set_button_lamp(buttonType, floor, 1);
 	requests_requestFloor(floor, buttonType);
     
-    if(doorStatus == DOOR_OPEN)
+    if(doorStatus == DOOR_OPEN || 
+		currentState == ELEV_STOPPED_ON_FLOOR ||
+		currentState == ELEV_MOVING)
     {
         return;
-    }
+    }	
 
-    if(currentState == ELEV_IDLE)
+    int floorDiffSign = (floor - lastFloor > 0) - 
+						(floor - lastFloor < 0); // the sign of the floor difference
+
+    if(floorDiffSign)
     {
-        if(floor == lastFloor)
-        {
-            doorStatus = DOOR_OPEN;
-            elev_set_door_open_lamp(doorStatus);
+		if(currentState == ELEV_STOPPED_BETWEEN_FLOORS && currentDirection + floorDiffSign == 0)
+		{
+			lastFloor += currentDirection;
+		}
 
-            timer_start();
-            
-            return;
-        }
+        currentDirection = floorDiffSign;
     }
-
-    if(currentState == ELEV_STOPPED_BETWEEN_FLOORS || currentState == ELEV_IDLE)
+    else
     {
-        int floorDiff = floor - lastFloor;
+		if(currentState == ELEV_IDLE)
+		{
+		    doorStatus = DOOR_OPEN;
+		    elev_set_door_open_lamp(doorStatus);
 
-        if(floorDiff == 0)
-        {
-            currentDirection *= -1;
-            lastFloor = lastFloor - currentDirection; 
-        }
-        else
-        {
-            currentDirection = (floorDiff > 0) - (floorDiff < 0); // the sign of floorDiff
-        }
-    
-        elev_set_motor_direction(currentDirection);
-        currentState = ELEV_MOVING;
+		    timer_start();
+		    
+		    return;
+		}
+		else
+		{
+        	currentDirection *= -1;	
+			lastFloor -= currentDirection;
+		}
     }
+
+    elev_set_motor_direction(currentDirection);
+    currentState = ELEV_MOVING;
 }
 
 void fsm_evFloorReached(int floor)
@@ -147,7 +153,7 @@ void fsm_evFloorReached(int floor)
         
         if(floor < FLOOR_COUNT - 1)
         {
-            elev_set_button_lamp(BUTTON_CALL_UP, floor, 0);        
+            elev_set_button_lamp(BUTTON_CALL_UP, floor, 0);  
         }
         if(floor > 0)
         {
