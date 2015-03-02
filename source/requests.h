@@ -3,7 +3,7 @@
 
 void requests_enableRequesting();		
 void requests_disableRequesting();	
-int requests_isOnlyRequest();		
+int requests_isOnlyRequest(int floor, elev_motor_direction_t dir);		
 int requests_isRequestsEmpty();	
 void requests_clearAllRequests();			
 void requests_requestFloor(int floor, elev_button_type_t buttonType);		
