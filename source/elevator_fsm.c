@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "elev.h"
 #include "elevator_fsm.h"
 #include "timer.h"
@@ -125,18 +124,6 @@ void fsm_evRequestButtonPressed(int requestedFloor, elev_button_type_t buttonTyp
 		    	currentDirection *= -1;	
 				lastPassedFloor -= currentDirection;
 			}
-			/*else if(currentState == ELEV_IDLE)
-			{
-				// If the elevator is idle (no requests) and 
-				// the requested floor is the same as last floor, just open doors.
-
-				doorStatus = DOOR_OPEN;
-				elev_set_door_open_lamp(doorStatus);
-
-				timer_start();
-				
-				return;
-			}*/
 		}
 
 		elev_set_motor_direction(currentDirection);

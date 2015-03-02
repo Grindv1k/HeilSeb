@@ -76,10 +76,10 @@ int requests_isFloorRequested(int floor, elev_motor_direction_t dir)
         return 0;
     }
 
-	if(requests_isOnlyRequest(floor, dir))
-	{
+    if(requests_isOnlyRequest(floor, dir))
+    {
 		return 1;
-	}
+    }
 
     if(dir == DIRN_UP)
     {
